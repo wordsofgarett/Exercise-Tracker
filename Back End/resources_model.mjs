@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import 'dotenv/config';
 
-const RESOURCE_DB_NAME = 'resources_db';
+const EXERCISE_DB_NAME = 'exercises_db';
 
 let connection = undefined;
 
@@ -11,7 +11,7 @@ let connection = undefined;
 async function connect(){
     try{
         connection = await mongoose.connect(process.env.MONGODB_CONNECT_STRING, 
-                {dbName: RESOURCE_DB_NAME});
+                {dbName: EXERCISE_DB_NAME});
         console.log("Successfully connected to MongoDB");
     } catch(err){
         console.log(err);
@@ -116,4 +116,4 @@ const deleteResourceById = async (id) => {
     return result.deletedCount;
 }
 
-export { connect, createResource, getResourceByID, getManyResources, updateResource, deleteResourceById};
+export { createResource, getResourceByID, getManyResources, updateResource, deleteResourceById};
