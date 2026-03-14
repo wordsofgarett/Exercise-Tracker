@@ -1,8 +1,3 @@
-/**
- * Garett Foster
- * fostgare@oregonstate.edu
- */
-
 import 'dotenv/config';
 import express from 'express';
 import asyncHandler from 'express-async-handler';

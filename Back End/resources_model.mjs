@@ -1,12 +1,7 @@
-/**
- * Garett Foster
- * fostgare@oregonstate.edu
- */
-
 import mongoose from 'mongoose';
 import 'dotenv/config';
 
-const EXERCISE_DB_NAME = 'exercises_db';
+const RESOURCE_DB_NAME = 'resources_db';
 
 let connection = undefined;
 
@@ -16,8 +11,8 @@ let connection = undefined;
 async function connect(){
     try{
         connection = await mongoose.connect(process.env.MONGODB_CONNECT_STRING, 
-                {dbName: EXERCISE_DB_NAME});
-        console.log("Successfully connected to MongoDB using Mongoose!");
+                {dbName: RESOURCE_DB_NAME});
+        console.log("Successfully connected to MongoDB");
     } catch(err){
         console.log(err);
         throw Error(`Could not connect to MongoDB ${err.message}`)
@@ -25,52 +20,36 @@ async function connect(){
 }
 
 /**
- * Create and compile exercise schema 
+ * Create and compile resource schema 
  */
-const exerciseSchema = mongoose.Schema({
-    name: {type: String, required: true},
-    reps: {type: Number, required: true},
-    weight: {type: Number, required: true},
-    unit: {type: String, required: true},
-    date: {type: String, required: true}
+const resourceSchema = mongoose.Schema({
+    title: {type: String, required: true},
+    url: {type: String, required: true},
+    source: {type: String, required: false},
+    dateAdded: {type: String, required: false}
 });
 
-const Exercise = mongoose.model("Exercise", exerciseSchema);
+const Resource = mongoose.model("Resource", resourceSchema);
 
-/**
- * Date input validation
- * @param {String} date
- * Returns true if the date format is MM-DD-YY where MM, DD and YY are 2 digit integers
-*/
-function isDateValid(date) {
-    const format = /^\d\d-\d\d-\d\d$/;
-    return format.test(date);
-}
-
-function validateInput(name, reps, weight, unit, date) {
-    const validUnits = ["lbs","kgs"];
-    if (typeof(name) !== 'string') {return false;}
-    if (typeof(reps) !== 'number' || reps <= 0) {return false;}
-    if (typeof(weight) !== 'number' || weight <= 0) {return false;}
-    if (validUnits.includes(unit) === false) {return false;}
-    if (isDateValid(date) === false) {return false;}
+function validateInput(title, url) {
+    if (typeof(title) !== 'string') {return false;}
+    if (typeof(url) !== 'string') {return false;}
     return true;
 }
 
 /**
- * Create new exercise
- * @param {String} name
- * @param {Number} reps
- * @param {Number} weight
- * @param {String} unit
- * @param {String} date
+ * Create new resource
+ * @param {String} title
+ * @param {String} url
+ * @param {String} source
+ * @param {String} dateAdded
  * @returns A promise. 
  * Resolves to the JSON object for the document created by calling save.
  */
-const createExercise = async (name, reps, weight, unit, date) => {
-    if (validateInput(name, reps, weight, unit, date)) {
-            const exercise = new Exercise({name: name, reps: reps, weight: weight, unit: unit, date: date});
-            return exercise.save();
+const createResource = async (title, url, source = "source", dateAdded = "date") => {
+    if (validateInput(title, url)) {
+            const resource = new Resource({title: title, url: url, source: source, dateAdded: dateAdded});
+            return resource.save();
     } else {
         return 400; 
     }
@@ -82,44 +61,43 @@ const createExercise = async (name, reps, weight, unit, date) => {
  * @returns A prommise. 
  * Resolves to JSON object if user is found.
  */
-const getExerciseByID = async (id) => {
-    const query = Exercise.findById(id);
+const getResourceByID = async (id) => {
+    const query = Resource.findById(id);
     return query.exec();
 }
 
 /**
- * Get several exercises by property - intended for name and/or date.
- * Retrieves all exercises if no filters are provided.
+ * Get several resources by property - intended for name and/or date.
+ * Retrieves all resources if no filters are provided.
  * @param {String} name Optional
  * @param {String} date Optional
  * @returns A promise. 
  * Resolves to array of JSON objects with matching properties, even if none exist.
  */
-const getManyExercises = async(filter) => {
-    const query = Exercise.find(filter);
+const getManyResources = async(filter) => {
+    const query = Resource.find(filter);
     return query.exec();
 }
 
 /**
  * Edit one by id
  * @param {String} id
- * @param {String} name
- * @param {Number} reps
- * @param {Number} weight
- * @param {String} unit
- * @param {String} date
+ * @param {String} title
+ * @param {String} url
+ * @param {String} source
+ * @param {String} dateAdded
  * @returns A promise. 
- * Resolves to number 400 if date input is invalid.
- * Resolves to number 404 if exercise is not found.
- * Resolves JSON object of updated exercise otherwise.
+ * Resolves to number 400 if input is invalid.
+ * Resolves to number 404 if resource is not found.
+ * Resolves JSON object of updated resource otherwise.
  */
-const updateExercise = async (id, updates) => {
-    if (validateInput(updates.name, updates.reps, updates.weight, updates.unit, updates.date)) {
-        const result = await Exercise.updateOne(id, updates).exec();
+const updateResource = async (id, updates) => {
+    if (validateInput(updates.title, updates.url)) {
+        const result = await Resource.updateOne(id, updates).exec();
             if (result.matchedCount === 0) {
                 return 404;
             } else {
-                return getExerciseByID(id);
+                return getResourceByID(id);
             };
     } else {
         return 400; 
@@ -128,14 +106,14 @@ const updateExercise = async (id, updates) => {
 }
 
 /**
- * Delete one exercise by id
+ * Delete one resource by id
  * @param {String} id 
  * @returns A promise. 
- * Resolves to a empty body if exercise id is found and deleted; otherwise, returns number 404.
+ * Resolves to a empty body if resource id is found and deleted; otherwise, returns number 404.
  */
-const deleteExerciseById = async (id) => {
-    const result = await Exercise.deleteOne({_id: id});
+const deleteResourceById = async (id) => {
+    const result = await Resource.deleteOne({_id: id});
     return result.deletedCount;
 }
 
-export { connect, createExercise, getExerciseByID, getManyExercises, updateExercise, deleteExerciseById};
+export { connect, createResource, getResourceByID, getManyResources, updateResource, deleteResourceById};

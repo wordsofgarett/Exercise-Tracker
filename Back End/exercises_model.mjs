@@ -1,8 +1,3 @@
-/**
- * Garett Foster
- * fostgare@oregonstate.edu
- */
-
 import mongoose from 'mongoose';
 import 'dotenv/config';
 
@@ -17,7 +12,7 @@ async function connect(){
     try{
         connection = await mongoose.connect(process.env.MONGODB_CONNECT_STRING, 
                 {dbName: EXERCISE_DB_NAME});
-        console.log("Successfully connected to MongoDB using Mongoose!");
+        console.log("Successfully connected to MongoDB");
     } catch(err){
         console.log(err);
         throw Error(`Could not connect to MongoDB ${err.message}`)

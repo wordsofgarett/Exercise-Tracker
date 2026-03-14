@@ -1,0 +1,8 @@
+# Back End
+Back End/.env 
+Back End/node_modules/
+Back End/a9-test-requests.http
+
+
+# Front End
+Front End/node_modules/
