@@ -1,23 +1,4 @@
 import mongoose from 'mongoose';
-import 'dotenv/config';
-
-const EXERCISE_DB_NAME = 'exercises_db';
-
-let connection = undefined;
-
-/**
- * Connect to the server
- */
-async function connect(){
-    try{
-        connection = await mongoose.connect(process.env.MONGODB_CONNECT_STRING, 
-                {dbName: EXERCISE_DB_NAME});
-        console.log("Successfully connected to MongoDB");
-    } catch(err){
-        console.log(err);
-        throw Error(`Could not connect to MongoDB ${err.message}`)
-    }
-}
 
 /**
  * Create and compile resource schema 
@@ -31,7 +12,7 @@ const resourceSchema = mongoose.Schema({
 
 const Resource = mongoose.model("Resource", resourceSchema);
 
-function validateInput(title, url) {
+function validateResourceInput(title, url) {
     if (typeof(title) !== 'string') {return false;}
     if (typeof(url) !== 'string') {return false;}
     return true;
@@ -47,7 +28,7 @@ function validateInput(title, url) {
  * Resolves to the JSON object for the document created by calling save.
  */
 const createResource = async (title, url, source = "source", dateAdded = "date") => {
-    if (validateInput(title, url)) {
+    if (validateResourceInput(title, url)) {
             const resource = new Resource({title: title, url: url, source: source, dateAdded: dateAdded});
             return resource.save();
     } else {

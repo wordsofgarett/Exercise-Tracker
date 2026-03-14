@@ -27,7 +27,10 @@ const exerciseSchema = mongoose.Schema({
     reps: {type: Number, required: true},
     weight: {type: Number, required: true},
     unit: {type: String, required: true},
-    date: {type: String, required: true}
+    date: {type: String, required: true},
+    sets: {type: Number, required: true},
+    muscle_group: {type: String, required: false},
+    user: {type: String, required: false}
 });
 
 const Exercise = mongoose.model("Exercise", exerciseSchema);
@@ -38,15 +41,18 @@ const Exercise = mongoose.model("Exercise", exerciseSchema);
  * Returns true if the date format is MM-DD-YY where MM, DD and YY are 2 digit integers
 */
 function isDateValid(date) {
-    const format = /^\d\d-\d\d-\d\d$/;
+    const format = /^\d\d\d\d-\d\d-\d\d$/;
     return format.test(date);
 }
 
-function validateInput(name, reps, weight, unit, date) {
-    const validUnits = ["lbs","kgs"];
+function validateInput(name, reps, weight, unit, date, sets) {
+    const validUnits = ["body","lbs","kgs"];
     if (typeof(name) !== 'string') {return false;}
     if (typeof(reps) !== 'number' || reps <= 0) {return false;}
-    if (typeof(weight) !== 'number' || weight <= 0) {return false;}
+    if (typeof(sets) !== 'number' || reps <= 0) {return false;}
+    if (unit !== "body") {
+        if (typeof(weight) !== 'number' || weight <= 0) {return false;}
+    }
     if (validUnits.includes(unit) === false) {return false;}
     if (isDateValid(date) === false) {return false;}
     return true;
@@ -59,12 +65,15 @@ function validateInput(name, reps, weight, unit, date) {
  * @param {Number} weight
  * @param {String} unit
  * @param {String} date
+ * @param {Number} sets
+ * @param {String} muscle_group
+ * @param {String} user
  * @returns A promise. 
  * Resolves to the JSON object for the document created by calling save.
  */
-const createExercise = async (name, reps, weight, unit, date) => {
-    if (validateInput(name, reps, weight, unit, date)) {
-            const exercise = new Exercise({name: name, reps: reps, weight: weight, unit: unit, date: date});
+const createExercise = async (name, reps, weight, unit, date, sets, muscle_group, user) => {
+    if (validateInput(name, reps, weight, unit, date, sets)) {
+            const exercise = new Exercise({name: name, reps: reps, weight: weight, unit: unit, date: date, sets: sets, muscle_group: muscle_group, user: user});
             return exercise.save();
     } else {
         return 400; 

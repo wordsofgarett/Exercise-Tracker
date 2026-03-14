@@ -16,14 +16,17 @@ app.listen(PORT, async () => {
 
 /**
  * Create a new exercise with the query parameters provided in the body
- * date property must be of form MM-DD-YY
+ * date property must be of form YYYY-MM-DD
  */
 app.post('/exercises', asyncHandler(async (req, res) => {
     const exercise = await exercises.createExercise(req.body.name, 
                         req.body.reps, 
                         req.body.weight,
                         req.body.unit,
-                        req.body.date);
+                        req.body.date,
+                        req.body.sets,
+                        req.body.muscle_group,
+                        req.body.user);
     if (exercise === 400) {
         res.status(400).json({Error: "Invalid request"});
     } else {
