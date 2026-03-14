@@ -118,7 +118,7 @@ const getManyExercises = async(filter) => {
  * Resolves JSON object of updated exercise otherwise.
  */
 const updateExercise = async (id, updates) => {
-    if (validateInput(updates.name, updates.reps, updates.weight, updates.unit, updates.date)) {
+    if (validateInput(updates.name, updates.reps, updates.weight, updates.unit, updates.date, updates.sets, updates.muscle_group, updates.user)) {
         const result = await Exercise.updateOne(id, updates).exec();
             if (result.matchedCount === 0) {
                 return 404;

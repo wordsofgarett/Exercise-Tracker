@@ -2,10 +2,11 @@ import './App.css'
 import Navigation from './components/Navigation';
 import {useState} from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import Create from './pages/Create'
-import Resources from './pages/Resources'
 import Home from './pages/Home'
-import Edit from './pages/Edit'
+import CreateExercise from './pages/CreateExercise'
+import EditExercise from './pages/EditExercise'
+import Resources from './pages/Resources'
+
 
 function App() {
 
@@ -22,8 +23,8 @@ function App() {
           <Navigation />
           <Routes>
             <Route path="/" element={<Home setExerciseToEdit = {setExerciseToEdit} />}></Route>
-            <Route path="/edit" element={<Edit exerciseToEdit = {exerciseToEdit} />}></Route>
-            <Route path="/create" element={ <Create />}></Route>
+            <Route path="/createExercise" element={ <CreateExercise />}></Route>
+            <Route path="/editExercise" element={<EditExercise exerciseToEdit = {exerciseToEdit} />}></Route>
             <Route path="/resources" element={ <Resources />}></Route>
           </Routes>
         </Router>

@@ -8,6 +8,7 @@ function Records({exercises, deleteExercise, editExercise}) {
                 <tr>
                     <th>Name</th>
                     <th>Reps</th>
+                    <th>Sets</th>
                     <th>Weight</th>
                     <th>Units</th>
                     <th>Date</th>

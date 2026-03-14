@@ -32,7 +32,7 @@ function Home({setExerciseToEdit}) {
 
     const editExercise = async(exercise) => {
         setExerciseToEdit(exercise);
-        navigate('/edit');
+        navigate('/editExercise');
     }
 
     return (

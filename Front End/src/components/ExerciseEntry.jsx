@@ -7,6 +7,7 @@ function ExerciseEntry({exercise, deleteExercise, editExercise}) {
         <tr className="exercise-entry">
             <td>{exercise.name}</td>
             <td>{exercise.reps}</td>
+            <td>{exercise.sets}</td>
             <td>{exercise.weight}</td>
             <td>{exercise.unit}</td>
             <td>{exercise.date}</td>
