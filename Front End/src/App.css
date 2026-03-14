@@ -1,0 +1,128 @@
+#root {
+  font-family: 'JetBrains Mono', monospace, Avenir;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  color: #DAA520;
+  background-color: #242424;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
+}
+
+body {
+  font-family: 'JetBrains Mono', monospace, Avenir;
+  color: #DAA520;
+  background-color: #242424;
+  margin: 0;
+  padding: 5px;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+header, footer {
+  margin-top:30px
+}
+
+h1 {
+  font-family: 'JetBrains Mono';
+  font-size: 50px;
+  margin-bottom: -10px;
+  font-weight: 200;
+}
+
+h2 {
+  font-family: 'JetBrains Mono';
+  font-weight: 300;
+}
+
+a {
+  color: #242424
+}
+
+nav {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.records-table {
+    margin-left: auto;
+    margin-right: auto;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: none;
+    width: 70%;
+    margin-top: 3%;
+    margin-bottom: 5%;
+}
+
+th, tr, td {
+  border: none;
+  padding: 2px;
+}
+
+th:nth-last-child(2), th:last-child {
+  padding: 10px;
+  width: 2%
+}
+
+.resource-item {
+  border: 2pt solid #DAA520;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 5px;
+  border-bottom-right-radius: 3ex;
+  border-bottom-left-radius: 3ex;
+  border-top-left-radius: 3ex;
+}
+
+.resource-item:hover{
+  cursor: pointer;
+}
+
+.app-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-resource-button {
+  font-size: 20px;
+  width: 240px;
+}
+
+button, .app-button, .home-page-create-button {
+  background-color: #DAA520;
+  color: #242424;
+  font-family: inherit;
+  padding: 10px;
+  height: 50px;
+  width: 160px;
+  margin: 10px;
+  font-size: 20px;
+  font-weight: 200;
+  border: none;
+  cursor:pointer;
+  clip-path: polygon(0 11px,11px 0,calc(100% - 11px) 0,100% 11px,100% calc(100% - 11px),calc(100% - 11px) 100%,11px 100%,0 calc(100% - 11px));;
+}
+
+button:hover, .app-button:hover, .home-page-create-button:hover {
+  background-color: #D49335;
+}
+
+input, select {
+  padding: 5px;
+  margin: 3px;
+  font-size: 14px;
+}
+
+.row-edit-button:hover, .row-delete-button:hover {
+  cursor: pointer;
+  color: #D49335;
+}

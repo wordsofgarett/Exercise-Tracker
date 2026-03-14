@@ -1,0 +1,9 @@
+:root {
+    font-family: 'JetBrains Mono', Avenir, monospace;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    color: #DAA520;
+    background-color: #242424;
+}
