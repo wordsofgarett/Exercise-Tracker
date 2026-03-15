@@ -51,6 +51,10 @@ nav {
   justify-content: center;
 }
 
+fieldset {
+  border-color: #DAA520;
+}
+
 .records-table {
     margin-left: auto;
     margin-right: auto;
