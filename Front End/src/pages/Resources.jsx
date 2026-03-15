@@ -1,7 +1,7 @@
 import '../App.css'
-import ResourceList from '../data/ListOfResources';
-import Resource from '../components/Resource';
-import { useState } from 'react';
+import ResourceList from '../components/ResourceList';
+import { useState, useEffect } from 'react';
+import {useNavigate} from 'react-router-dom';
 
 function Resources () {
     const [revealAddResource, setRevealAddResource] = useState(false);
@@ -9,16 +9,29 @@ function Resources () {
     const [source, setSource] = useState();
     const [url, setURL] = useState();
 
-    const addResource = () => {
-        const newResource = {title, source, url}
-        ResourceList.push(newResource)
+    const [resources, setResources] = useState([]);
+    
+    const fetchResources = async () => {
+        const response = await fetch('/resources')
+        await console.log(response)
+        const data = await response.json()
+        setResources(data)
     }
+
+    useEffect( () => {
+        fetchResources()
+    }, []);
+    
+    // const addResource = () => {
+    //     const newResource = {title, source, url}
+    //     ResourceList.push(newResource)
+    // }
 
     return (
         <>
-        <>
-            {ResourceList.map((resource,i) => <Resource resource = {resource} key = {i} />)}
-        </>
+        <div>
+            <ResourceList resources = {resources} />
+        </div>
 
         <div>
             <button className="add-resource-button" onClick ={() => 

@@ -10,6 +10,7 @@ function Home({setExerciseToEdit}) {
 
     const fetchExercises = async () => {
         const response = await fetch('/exercises')
+        console.log(response)
         const data = await response.json()
         setExercises(data)
     }

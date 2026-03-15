@@ -25,7 +25,7 @@ function App() {
             <Route path="/" element={<Home setExerciseToEdit = {setExerciseToEdit} />}></Route>
             <Route path="/createExercise" element={ <CreateExercise />}></Route>
             <Route path="/editExercise" element={<EditExercise exerciseToEdit = {exerciseToEdit} />}></Route>
-            <Route path="/resources" element={ <Resources />}></Route>
+            <Route path="/moreresources" element={ <Resources />}></Route>
           </Routes>
         </Router>
         <footer>
