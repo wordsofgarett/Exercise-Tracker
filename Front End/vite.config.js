@@ -8,6 +8,9 @@ export default defineConfig({
     proxy: {
     '/exercises': {
       target: 'http://localhost:3000'
+      },
+    '/resources': {
+      target: 'http://localhost:3000'
       } 
     }
   }

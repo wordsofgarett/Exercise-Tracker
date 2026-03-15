@@ -1,14 +1,9 @@
 import '../App.css'
-import ResourceList from '../components/ResourceList';
+import ResourceList from "../components/ResourceList";
 import { useState, useEffect } from 'react';
 import {useNavigate} from 'react-router-dom';
 
 function Resources () {
-    const [revealAddResource, setRevealAddResource] = useState(false);
-    const [title, setTitle] = useState();
-    const [source, setSource] = useState();
-    const [url, setURL] = useState();
-
     const [resources, setResources] = useState([]);
     
     const fetchResources = async () => {
@@ -22,10 +17,16 @@ function Resources () {
         fetchResources()
     }, []);
     
-    // const addResource = () => {
-    //     const newResource = {title, source, url}
-    //     ResourceList.push(newResource)
-    // }
+    const todays_date = new Date();
+    const [revealAddResource, setRevealAddResource] = useState(false);
+    const [title, setTitle] = useState();
+    const [source, setSource] = useState();
+    const [url, setURL] = useState();
+    
+    const addResource = () => {
+        const newResource = {title, source, url, todays_date}
+        ResourceList.push(newResource)
+    }
 
     return (
         <>

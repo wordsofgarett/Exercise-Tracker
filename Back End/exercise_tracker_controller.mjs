@@ -112,6 +112,7 @@ app.get('/resources/:id', asyncHandler(async (req, res) => {
  */
 app.get('/resources', asyncHandler(async (req, res) => {
     const matched_resources = await resources.getManyResources(req.query);
+    console.log(matched_resources)
     res.status(200).json(matched_resources);
 }))
 
