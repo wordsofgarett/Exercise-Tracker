@@ -1,7 +1,6 @@
 import '../App.css'
 import ResourceList from "../components/ResourceList";
 import { useState, useEffect } from 'react';
-import {useNavigate} from 'react-router-dom';
 
 function Resources () {
     const [resources, setResources] = useState([]);
@@ -23,9 +22,19 @@ function Resources () {
     const [source, setSource] = useState();
     const [url, setURL] = useState();
     
-    const addResource = () => {
+    const addResource = async () => {
         const newResource = {title, source, url, todays_date}
-        ResourceList.push(newResource)
+        const response = await fetch ('/resources', {
+            method: 'POST',
+            body: JSON.stringify(newResource),
+            headers: {'Content-Type': 'application/json'}
+        });
+        if (response.status === 201) {
+            alert(`Successfully added ${title}`);
+        } else {
+            alert(`Failed to add ${title}, status code: ${response.status}`);
+        }
+        location.reload();
     }
 
     return (
@@ -62,7 +71,6 @@ function Resources () {
             <button className="submit-button" onClick={e => {
                 addResource();
                 e.preventDefault();
-                alert(`Notice: functionality not fully implemented and does not save new resource in a persistant way. My actual React App that I will use (I had been planning to build an exercise tracker anyway) will save to my MongoDB, which has a separate Resources collection. I added this to see if I could get the form to appear and disappear, rather than navigating to a new page.`);
                 setRevealAddResource(!revealAddResource);
                 setTitle('');
                 setSource('');
