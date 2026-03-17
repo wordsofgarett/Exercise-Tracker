@@ -14,8 +14,12 @@ From the Front End directory in the terminal, run `npm run dev`
 
 ## Usage
 Navigate to `http://localhost:5173` in your browser to access the application  
+  
 ![HomePage](HomePage.png "Exercise Tracker Home Page")
 
+![CreatePage](CreatePage.png "Create New Exercise Page")  
+
+![ResourcesPage](ResourcesPage.png "Resources Exercise Page")
 ## Roadmap
 Support for additional exercise types (current design intended for strength training/calisthenics)  
 Auto-population of input fields based on current date and autocompleted exercise name  
