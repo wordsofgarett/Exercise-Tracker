@@ -14,7 +14,7 @@ From the Front End directory in the terminal, run `npm run dev`
 
 ## Usage
 Navigate to `http://localhost:5173` in your browser to access the application  
-"./Home Page.png"
+![HomePage]("./Home Page.png" "Exercise Tracker Home Page")
 
 ## Roadmap
 Support for additional exercise types (current design intended for strength training/calisthenics)  
