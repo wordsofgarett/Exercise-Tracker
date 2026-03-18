@@ -12,6 +12,7 @@ function Home({setExerciseToEdit}) {
         const response = await fetch('/exercises')
         console.log(response)
         const data = await response.json()
+        data.sort((b,a) => a.date.localeCompare(b.date))
         setExercises(data)
     }
 

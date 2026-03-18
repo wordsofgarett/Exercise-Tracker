@@ -3,12 +3,22 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function CreateExercise () {
+    
+function formatDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Pad with leading zero
+    const day = String(date.getDate()).padStart(2, '0'); // Pad with leading zero
+    return `${year}-${month}-${day}`;
+}
+
+const todays_date = formatDate(new Date()); // e.g., "2024-05-20"
+
     const [name, setName] = useState('');
-    const [reps, setReps] = useState('');
-    const [sets, setSets] = useState('');
+    const [reps, setReps] = useState(10);
+    const [sets, setSets] = useState(3);
     const [weight, setWeight] = useState('');
     const [unit, setUnit] = useState('');
-    const [date, setDate] = useState('');
+    const [date, setDate] = useState(todays_date);
     const [muscle_group, setMuscleGroup] = useState('');
     const [user, setUser] = useState('');
 
