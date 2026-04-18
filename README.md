@@ -1,4 +1,4 @@
-# Exercise Tracker v0.2.0
+# Exercise Tracker v0.2.1
 
 ## Description
 This project grew out of a class (CS 290 - Web Development at Oregon State University) portfolio project that overlapped heavily with a personal project I had been dragging my feet on starting. The project is a single-page-app built using the full MERN stack and JavaScript.  

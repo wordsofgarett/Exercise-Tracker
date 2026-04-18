@@ -23,7 +23,15 @@ const todays_date = formatDate(new Date()); // e.g., "2024-05-20"
     const [user, setUser] = useState('');
 
     const navigate = useNavigate();
-
+    
+    const clearForm = () => {
+        setName('');
+        setReps(10);
+        setSets(3);
+        setWeight('');
+        setUnit('');
+    }
+    
     const recordExercise = async () => {
         const newExercise = {name, reps, weight, unit, date, sets, muscle_group, user};
         const response = await fetch ('/exercises', {
@@ -36,12 +44,12 @@ const todays_date = formatDate(new Date()); // e.g., "2024-05-20"
         } else {
             alert(`Failed to add ${name}, status code: ${response.status}`);
         }
-        navigate("/");
+        clearForm();
     }
 
     return (
         <div >
-            <form className = "single-exercise-entry">
+            <form className = "single-exercise-entry" id = "single-exercise-entry">
                 <fieldset>
                     <legend>Record an Exercise</legend>
                     <label>Name: 
