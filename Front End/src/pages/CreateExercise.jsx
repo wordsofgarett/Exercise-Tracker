@@ -67,7 +67,7 @@ const todays_date = formatDate(new Date()); // e.g., "2024-05-20"
                             onChange={e => setSets(e.target.valueAsNumber)} />
                     </label>
                     <br/>
-                    <label>Weight: 
+                    <label>Weight/Time: 
                         <input type="number" min="0" value={weight}
                             onChange={e => setWeight(e.target.valueAsNumber)} />
                     </label>
@@ -79,6 +79,7 @@ const todays_date = formatDate(new Date()); // e.g., "2024-05-20"
                             <option value = "body">body</option>
                             <option value = "lbs">lbs</option>
                             <option value = "kgs">kgs</option>
+                            <option value = "secs">secs</option>
                         </select>
                     </label>
                     <br/>

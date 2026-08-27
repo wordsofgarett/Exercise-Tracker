@@ -46,7 +46,7 @@ function isDateValid(date) {
 }
 
 function validateInput(name, reps, weight, unit, date, sets) {
-    const validUnits = ["body","lbs","kgs"];
+    const validUnits = ["body","lbs","kgs","secs"];
     if (typeof(name) !== 'string') {return false;}
     if (typeof(reps) !== 'number' || reps <= 0) {return false;}
     if (typeof(sets) !== 'number' || reps <= 0) {return false;}

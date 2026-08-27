@@ -49,7 +49,7 @@ function EditExercise ({exerciseToEdit}) {
                             onChange={e => setSets(e.target.valueAsNumber)} />
                     </label>
                     <br/>
-                    <label>Weight: 
+                    <label>Weight/Time: 
                         <input type="number" min="0" value={weight}
                             onChange={e => setWeight(e.target.valueAsNumber)} />
                     </label>
@@ -61,6 +61,7 @@ function EditExercise ({exerciseToEdit}) {
                             <option value = "body">body</option>
                             <option value = "lbs">lbs</option>
                             <option value = "kgs">kgs</option>
+                            <option value = "secs">secs</option>
                         </select>
                     </label>
                     <br/>
